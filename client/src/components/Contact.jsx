@@ -28,6 +28,8 @@ function Contact() {
       ...prev,
       [name]: ""
     }));
+
+    setStatus(""); //  limpia el mensaje guardado
   };
 
   const validateForm = () => {
@@ -59,7 +61,7 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (loading) return;
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
@@ -70,24 +72,43 @@ function Contact() {
     setErrors({});
     setIsError(false);
     setLoading(true);
+    // try {
+
+    //   const res = await API.post("/contact", form);
+
+    //   setStatus(res.data.message);
+
+    //   setForm({
+    //     name: "",
+    //     email: "",
+    //     message: ""
+    //   });
+
+    // } catch (error) {
+    //   const msg = error.response?.data?.message || "Error al enviar mensaje";
+    //   setIsError(true);
+    //   setStatus(msg);
+    // }
+    // setLoading(false);
+
     try {
+        const res = await API.post("/contact", form);
 
-      const res = await API.post("/contact", form);
+        setStatus(res.data.message);
 
-      setStatus(res.data.message);
+        setForm({
+          name: "",
+          email: "",
+          message: ""
+        });
 
-      setForm({
-        name: "",
-        email: "",
-        message: ""
-      });
-
-    } catch (error) {
-      const msg = error.response?.data?.message || "Error al enviar mensaje";
-      setIsError(true);
-      setStatus(msg);
-    }
-    setLoading(false);
+      } catch (error) {
+        const msg = error.response?.data?.message || "Error al enviar mensaje";
+        setIsError(true);
+        setStatus(msg);
+      } finally {
+        setLoading(false);
+      }
   };
 
   return (
@@ -132,7 +153,7 @@ function Contact() {
         ></textarea>
         {errors.message && <p className="text-red-400">{errors.message}</p>}
 
-        <button disabled={loading} className="bg-blue-500 py-3 rounded hover:bg-blue-600 transition disabled:opacity-50">
+        <button disabled={loading} className="bg-blue-500 py-3 rounded hover:bg-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
             {loading ? "Enviando..." : "Enviar"}
         </button>
 
