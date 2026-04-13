@@ -1,6 +1,6 @@
 import express from "express";
 import Message from "../models/Message.js";
-
+import { sendEmail } from "../utils/mailer.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {

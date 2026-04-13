@@ -1,7 +1,7 @@
 import { useState } from "react";
 import API from "../services/api";
 import toast from "react-hot-toast";
-import { sendEmail } from "../utils/mailer.js";
+
 
 
 function Contact() {
