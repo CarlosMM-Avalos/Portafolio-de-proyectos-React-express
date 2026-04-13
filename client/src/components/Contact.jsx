@@ -32,7 +32,7 @@ function Contact() {
       [name]: ""
     }));
 
-    setStatus(""); //  limpia el mensaje guardado
+    //setStatus("");   limpia el mensaje guardado
   };
 
   const validateForm = () => {
@@ -73,7 +73,7 @@ function Contact() {
     }
 
     setErrors({});
-    setIsError(false);
+    //setIsError(false);
     setLoading(true);
     // try {
 
@@ -109,7 +109,7 @@ function Contact() {
 
       } catch (error) {
         const msg = error.response?.data?.message || "Error al enviar mensaje";
-        setIsError(true);
+        //setIsError(true);
         // setStatus(msg);
         toast.error(msg);
       } finally {
