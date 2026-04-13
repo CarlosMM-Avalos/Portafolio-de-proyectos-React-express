@@ -13,8 +13,8 @@ function Contact() {
   });
 
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("");
-  const [isError, setIsError] = useState(false);
+  // const [status, setStatus] = useState("");
+  // const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
 
 
@@ -96,8 +96,10 @@ function Contact() {
 
     try {
         const res = await API.post("/contact", form);
-
-        setStatus(res.data.message);
+        
+        
+        toast.success("Mensaje enviado correctamente");
+        // setStatus(res.data.message);
 
         setForm({
           name: "",
@@ -108,7 +110,8 @@ function Contact() {
       } catch (error) {
         const msg = error.response?.data?.message || "Error al enviar mensaje";
         setIsError(true);
-        setStatus(msg);
+        // setStatus(msg);
+        toast.error(msg);
       } finally {
         setLoading(false);
       }
@@ -160,11 +163,11 @@ function Contact() {
             {loading ? "Enviando..." : "Enviar"}
         </button>
 
-        {status && (
+        {/* {status && (
           <p className={`text-center ${isError ? "text-red-400" : "text-green-400"}`}>
             {status}
           </p>
-        )}
+        )} */}
 
       </form>
     </section>
