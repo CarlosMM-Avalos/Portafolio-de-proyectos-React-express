@@ -45,6 +45,8 @@ router.post("/", async (req, res) => {
     });
 
     await newMessage.save();
+    //ENVIAR CORREO
+    await sendEmail({ name, email, message });
 
     res.json({ message: "Mensaje guardado correctamente.." });
 
