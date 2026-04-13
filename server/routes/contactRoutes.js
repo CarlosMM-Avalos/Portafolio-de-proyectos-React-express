@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 
     await newMessage.save();
 
-    res.json({ message: "Mensaje guardado correctamente" });
+    res.json({ message: "Mensaje guardado correctamente.." });
 
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" });
