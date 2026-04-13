@@ -51,7 +51,12 @@ router.post("/", async (req, res) => {
     res.json({ message: "Mensaje guardado correctamente.." });
 
   } catch (error) {
-    res.status(500).json({ message: "Error en el servidor" });
+    console.error("ERROR BACKEND:", error); // 🔥 CLAVE
+
+    res.status(500).json({ 
+      message: "Error en el servidor",
+      error: error.message // opcional para debug
+    });
   }
 });
 
